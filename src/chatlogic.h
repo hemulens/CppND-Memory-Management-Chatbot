@@ -1,8 +1,10 @@
 #ifndef CHATLOGIC_H_
 #define CHATLOGIC_H_
 
-#include <vector>
 #include <string>
+#include <vector>
+#include <memory>
+
 #include "chatgui.h"
 
 // forward declarations
@@ -10,16 +12,13 @@ class ChatBot;
 class GraphEdge;
 class GraphNode;
 
-class ChatLogic
-{
-private:
+class ChatLogic {
+  private:
     //// STUDENT CODE
     ////
-
     // data handles (owned)
-    std::vector<GraphNode *> _nodes;
-    std::vector<GraphEdge *> _edges;
-
+    std::vector<std::unique_ptr<GraphNode>> _nodes;
+    // std::vector<GraphEdge *> _edges;  // Sergei: Looks like we don't need _edges anymore. Please see my comments in .cpp
     ////
     //// EOF STUDENT CODE
 
@@ -35,7 +34,7 @@ private:
     template <typename T>
     void AddAllTokensToElement(std::string tokenID, tokenlist &tokens, T &element);
 
-public:
+  public:
     // constructor / destructor
     ChatLogic();
     ~ChatLogic();
